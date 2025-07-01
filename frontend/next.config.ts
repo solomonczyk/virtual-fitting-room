@@ -1,6 +1,6 @@
 ﻿/** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: { appDir: true },          // опция уже есть у Next 15; оставляем
+            // опция уже есть у Next 15; оставляем
   rewrites() {
     return [
       {
@@ -12,3 +12,4 @@ const nextConfig = {
 };
 
 export default nextConfig;
+
