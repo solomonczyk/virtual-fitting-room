@@ -1,0 +1,21 @@
+﻿version: '3.9'
+services:
+  frontend:
+    image: node:20-alpine      # лёгкий образ Node 20, рекомендует Next.js Docker guide :contentReference[oaicite:4]{index=4}
+    working_dir: /app
+    volumes:
+      - ./frontend:/app        # hot-reload кода в контейнере
+    command: sh -c 'npm install && npm run dev'
+    ports:
+      - '3000:3000'
+    environment:
+      - NEXT_TELEMETRY_DISABLED=1  # отключаем телеметрию как советует Next.js FAQ :contentReference[oaicite:5]{index=5}
+
+  backend:
+    image: python:3.12-slim    # официальный образ Python, FastAPI доки советуют slim-вариант :contentReference[oaicite:6]{index=6}
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    command: sh -c 'pip install --no-cache-dir -r requirements.txt && uvicorn main:app --host 0.0.0.0 --port 8000 --reload'
+    ports:
+      - '8000:8000'
